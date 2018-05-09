@@ -52,7 +52,7 @@ public class DisruptorMain {
 
         RingBuffer<Element> ringBuffer = disruptor.getRingBuffer();
 
-        for (int l = 0; true; l++) {
+        for (int l = 1; l<101; l++) {
             // 获取下一个可用位置的下标
             long sequence = ringBuffer.next();
             try {
