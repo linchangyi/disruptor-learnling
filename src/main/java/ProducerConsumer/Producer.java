@@ -13,16 +13,15 @@ public class Producer implements Runnable {
     }
 
     public void run() {
-        //produce Strings
-        for (int i = 0; i < 100; i++) {
-            String msg = producerName + ":" + i;
-            try {
-//                Thread.sleep(i);
+        int i=0;
+        try {
+            while (i<100){
+//            Thread.sleep(i);
+                String msg = "" + ++i;
                 queue.put(msg);
-                System.out.println(msg);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }

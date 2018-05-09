@@ -15,19 +15,6 @@ public class DisruptorMain {
         /**
          * 队列中的元素
          */
-        class Element {
-
-            private int value;
-
-            public int get() {
-                return value;
-            }
-
-            public void set(int value) {
-                this.value = value;
-            }
-
-        }
 
         // 生产者的线程工厂
         ThreadFactory threadFactory = new ThreadFactory() {
@@ -45,25 +32,20 @@ public class DisruptorMain {
             }
         };
 
-        // 处理Event的handler
-        EventHandler<Element> handler = new EventHandler<Element>() {
-            @Override
-            public void onEvent(Element element, long sequence, boolean endOfBatch) {
-                System.out.println("Element: " + element.get());
-            }
-        };
 
         // 阻塞策略
         BlockingWaitStrategy strategy = new BlockingWaitStrategy();
 
         // 指定RingBuffer的大小
+        // bufferSize 必须为2^n
+        // m % 2^n = m & (2^n-1)
         int bufferSize = 16;
 
         // 创建disruptor，采用单生产者模式
         Disruptor<Element> disruptor = new Disruptor(factory, bufferSize, threadFactory, ProducerType.SINGLE, strategy);
 
         // 设置EventHandler
-        disruptor.handleEventsWith(handler);
+        disruptor.handleEventsWith(new Consumer());
 
         // 启动disruptor的线程
         disruptor.start();

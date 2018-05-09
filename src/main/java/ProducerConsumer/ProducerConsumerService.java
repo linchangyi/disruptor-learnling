@@ -8,7 +8,7 @@ public class ProducerConsumerService {
     public static void main(String[] args) {
 
         final int consumer_count = 1;
-        final int producer_count = 5;
+        final int producer_count = 1;
 
         BlockingQueue<String> queue = new ArrayBlockingQueue<String>(10);
 
