@@ -12,9 +12,6 @@ import java.util.concurrent.ThreadFactory;
  */
 public class DisruptorMain {
     public static void main(String[] args) throws Exception {
-        /**
-         * 队列中的元素
-         */
 
         // 生产者的线程工厂
         ThreadFactory threadFactory = new ThreadFactory() {
